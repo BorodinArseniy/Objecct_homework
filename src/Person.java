@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Person {
     private int yearOfBirth;
     private String name;
@@ -6,9 +9,11 @@ public class Person {
     private String jobTitle;
 
     public Person(int yearOfBirth, String name, String town, String jobTitle) {
-        if (yearOfBirth>0) {
+        if (yearOfBirth<1900) {
+             this.yearOfBirth = LocalDate.now().getYear() - yearOfBirth;
+        } else if (yearOfBirth>=1900) {
             this.yearOfBirth = yearOfBirth;
-        } else {
+        } else if (yearOfBirth<0) {
             this.yearOfBirth = 0;
         }
         if (name == null || name == " ") {
@@ -25,6 +30,32 @@ public class Person {
             System.out.println("Информация не указана");
         } else {
             this.jobTitle = jobTitle;
+        }
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        if (yearOfBirth<1900) {
+            this.yearOfBirth = LocalDate.now().getYear() - yearOfBirth;
+        } else if (yearOfBirth>=1900) {
+            this.yearOfBirth = yearOfBirth;
+        } else if (yearOfBirth<0) {
+            this.yearOfBirth = 0;
+        }
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        if(town!=null && !town.isBlank() && !town.isEmpty()) {
+            this.town = town;
+        } else {
+            this.town = "Информация не указана";
         }
     }
 
